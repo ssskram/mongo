@@ -25,7 +25,8 @@ app.use(bodyParser.json({
 app.use(require('morgan')('combined'))
 
 // routes
-
+app.use("/new",require('./routes/new'))
+app.use("/update",require('./routes/update'))
 
 // Production error handler
 if (app.get('env') === 'production') {
