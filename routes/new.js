@@ -7,17 +7,13 @@ const UserProfile = require('../models/pghSupply')
 
 // creates a new userProfile for users on PGH Supply
 router.post('/userProfile',
-    function (req, res) {
+    async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
-            var newProfile = new UserProfile(req.body);
-            console.log(newProfile)
-            newProfile.save((err, doc) => {
-                if (err) {
-                    res.send(err)
-                } else {
-                    res.send(doc)
-                }
+            var newProfile = new UserProfile(req.body)
+            await newProfile.save(err => {
+                if (err) res.status(500).send(err)
+                else res.status(200).end()
             })
         } else res.status(403).end()
     }

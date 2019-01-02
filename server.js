@@ -2,6 +2,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const bearerToken = require('express-bearer-token')
 const cors = require('cors')
+const session = require('express-session')
+const mongoose = require('mongoose')
+const MongoStore = require('connect-mongo')(session)
 
 // import env variables
 require('dotenv').config()
@@ -17,9 +20,11 @@ app.use(bearerToken())
 app.use(cors())
 
 // body parser
-app.use(bodyParser.json({
-  limit: '50mb'
-}))
+app.use(bodyParser.json())
+
+// connect to mongo
+mongoose.Promise = global.Promise
+mongoose.connect(process.env.MONGODB_URI)
 
 // logging
 app.use(require('morgan')('combined'))
