@@ -14,6 +14,7 @@ router.get('/userProfile',
         user: req.query.user
       }, (err, user) => {
         if (err) res.status(500).send(err)
+        else if (!user) res.status(404).end()
         else res.status(200).send(user)
       })
     } else res.status(403).end()

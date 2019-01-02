@@ -9,6 +9,9 @@ var ProfileSchema = new Schema({
     default: Date.now
   }
 }, {
+  shardKey: {
+    user: null
+  },
   collection: 'userProfiles'
 })
 

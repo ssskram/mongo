@@ -28,10 +28,8 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use(require('morgan')('combined'))
 
 // routes
-app.use("/new",require('./routes/new'))
-app.use("/update",require('./routes/update'))
+app.use("/save",require('./routes/save'))
 app.use("/get",require('./routes/get'))
-app.use("/delete",require('./routes/delete'))
 
 // Production error handler
 if (app.get('env') === 'production') {
