@@ -1,16 +1,21 @@
-
 // GET endpoints
 
 const express = require('express')
 const router = express.Router()
 const checkToken = require('../token')
+const UserProfile = require('../models/pghSupply')
 
-// gets all docs
-router.get('/documents',
+// get user profile
+router.get('/userProfile',
   function (req, res) {
     const valid = (checkToken(req.token))
     if (valid == true) {
-        // get mongo docs here
+      UserProfile.findOne({
+        user: req.query.user
+      }, (err, user) => {
+        if (err) res.status(500).send(err)
+        else res.status(200).send(user)
+      })
     } else res.status(403).end()
   }
 )
