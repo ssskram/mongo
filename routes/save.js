@@ -46,10 +46,7 @@ router.post('/cart',
                     if (user) {
                         user.cart = req.body.cart
                         user.save(err => {
-                            if (err) {
-                                console.log(err)
-                                res.status(500).send(err)
-                            }
+                            if (err) res.status(500).send(err)
                             else res.status(200).end()
                         })
                     } else {     
