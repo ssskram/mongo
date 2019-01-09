@@ -23,6 +23,7 @@ router.post('/userProfile',
                         })
                     } else {                        
                         user.department = req.body.department
+                        user.cart = req.body.cart
                         user.save(err => {
                             if (err) res.status(500).send(err)
                             else res.status(200).end()
