@@ -6,9 +6,9 @@ var ProfileSchema = new Schema({
   department: String,
   cart: [{
     item: {
-      cartegraphID: String,
-      name: String,
-      type: String,
+      cartegraphID: Number,
+      itemName: String,
+      itemType: String,
       department: String,
     },
     quantity: Number

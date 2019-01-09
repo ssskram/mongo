@@ -33,4 +33,30 @@ router.post('/userProfile',
     }
 )
 
+router.post('/cart',
+    function (req, res) {
+        const valid = (checkToken(req.token))
+        if (valid == true) {
+            UserProfile
+                .findOne({
+                    user: req.body.user
+                })
+                .then(user => {
+                    if (user) {
+                        user.cart = req.body.cart
+                        user.save(err => {
+                            if (err) {
+                                console.log(err)
+                                res.status(500).send(err)
+                            }
+                            else res.status(200).end()
+                        })
+                    } else {     
+                        res.status(404).send()                   
+                    }
+                })
+        } else res.status(403).end()
+    }
+)
+
 module.exports = router
