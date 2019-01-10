@@ -40,9 +40,9 @@ var OrderSchema = new Schema({
       cartegraphID: Number,
       itemName: String,
       itemType: String,
-      department: String,
     },
-    quantity: Number
+    quantityOrdered: Number,
+    quantityReceived: Number
   }],
   createdAt: {
     type: Date,
