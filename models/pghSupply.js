@@ -27,6 +27,7 @@ var UserProfile = mongoose.model('UserProfile', ProfileSchema)
 
 var OrderSchema = new Schema({
   user: String,
+  userName: String,
   department: String,
   location: String,
   comments: String,
@@ -35,6 +36,9 @@ var OrderSchema = new Schema({
   narcanCases: Boolean,
   narcanAdministeredUnknown: String,
   miscItems: String,
+  status: String,
+  supplyComments: String,
+  receivedBy: String,
   items: [{
     item: {
       cartegraphID: Number,
