@@ -40,7 +40,7 @@ var OrderSchema = new Schema({
   status: String,
   supplyComments: String,
   receivedBy: String,
-  items: [{
+  supplies: [{
     item: {
       cartegraphID: Number,
       itemName: String,
