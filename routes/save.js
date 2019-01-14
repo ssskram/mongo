@@ -73,12 +73,28 @@ router.post('/newOrder',
     }
 )
 
-router.post('/updatedOrder',
+router.post('/updateOrder',
     function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
-            // post to mongo here
-            res.status(202).end()
+            Order
+                .findOne({
+                    _id: req.body._id
+                })
+                .then(order => {
+                    if (order) {
+                        order.status = req.body.status
+                        order.supplyComments = req.body.supplyComments
+                        order.receivedBy = req.body.receivedBy
+                        order.supplies = req.body.supplies
+                        order.save(err => {
+                            if (err) res.status(500).send(err)
+                            else res.status(200).end()
+                        })
+                    } else {
+                        res.status(404).send()
+                    }
+                })
         } else res.status(403).end()
     }
 )
