@@ -29,10 +29,19 @@ router.get('/allOrders',
   async function (req, res) {
     const valid = (checkToken(req.token))
     if (valid == true) {
-      Order.find({}, (err, orders) => {
-        if (err) res.status(500).send(err)
-        else if (!orders) res.status(404).end()
-        else res.status(200).send(orders)
+
+      // let data = []
+      // let cursor = await Order.find({})
+      // cursor.forEach(or => {
+      //   data.push(or)
+      // })
+      // res.status(200).send(data).end()
+
+      await Order.find({}, {
+        isGetMore: false
+      }, (err, orders) => {
+        if (err) return {}
+        res.status(200).send(orders).end()
       })
     } else res.status(403).end()
   }
