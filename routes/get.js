@@ -3,10 +3,15 @@
 const express = require('express')
 const router = express.Router()
 const checkToken = require('../token')
+const assert = require('assert')
+var MongoClient = require('mongodb').MongoClient
+var url = process.env.MONGODB_URI_2
+
 const {
   UserProfile,
   Order
 } = require('../models/pghSupply')
+
 
 // get user profile
 router.get('/userProfile',
@@ -29,20 +34,28 @@ router.get('/allOrders',
   async function (req, res) {
     const valid = (checkToken(req.token))
     if (valid == true) {
+      const docs = []
+      var findFamilies = function (db, callback) {
+        var cursor = db.collection('orders').find()
+        cursor.each(function (err, doc) {
+          assert.equal(err, null)
+          if (doc != null) {
+            docs.push(doc)
+          } else {
+            callback()
+          }
+        })
+      }
 
-      // let data = []
-      // let cursor = await Order.find({})
-      // cursor.forEach(or => {
-      //   data.push(or)
-      // })
-      // res.status(200).send(data).end()
-
-      await Order.find({}, {
-        isGetMore: false
-      }, (err, orders) => {
-        if (err) return {}
-        res.status(200).send(orders).end()
+      MongoClient.connect(url, function (err, client) {
+        assert.equal(null, err)
+        var db = client.db('pghsupply')
+        findFamilies(db, function () {
+          client.close()
+          res.status(200).send(docs).end()
+        })
       })
+
     } else res.status(403).end()
   }
 )
