@@ -27,6 +27,7 @@ var ProfileSchema = new Schema({
 var UserProfile = mongoose.model('UserProfile', ProfileSchema)
 
 var OrderSchema = new Schema({
+  SPid: Number,
   user: String,
   userName: String,
   department: String,
