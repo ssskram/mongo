@@ -138,6 +138,9 @@
                                     "emergencyJustification": {
                                         "type": "string"
                                     },
+                                    "equipmentJustification": {
+                                        "type": "string"
+                                    },
                                     "narcanCases": {
                                         "type": "boolean"
                                     },
@@ -195,6 +198,72 @@
                     },
                     "403": {
                         "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/save/userProfile": {
+            "post": {
+                "tags": [
+                    "PGH Supply"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "User Profile",
+                "description": "Creates or overwrites user profile",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success!"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/save/cart": {
+            "post": {
+                "tags": [
+                    "PGH Supply"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "Cart",
+                "description": "Saves cart to user profile",
+                "parameters": [{
+                    
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success!"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
                     }
                 }
             }
