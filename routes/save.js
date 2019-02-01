@@ -37,6 +37,7 @@ router.post('/userProfile',
     }
 )
 
+// creates and/or overwrites a cart array within user profile
 router.post('/cart',
     function (req, res) {
         const valid = (checkToken(req.token))

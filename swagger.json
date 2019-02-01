@@ -245,7 +245,75 @@
                 "summary": "Cart",
                 "description": "Saves cart to user profile",
                 "parameters": [{
-                    
+
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success!"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/save/newOrder": {
+            "post": {
+                "tags": [
+                    "PGH Supply"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "New order",
+                "description": "Creates a new order record",
+                "parameters": [{
+
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success!"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/save/updateOrder": {
+            "post": {
+                "tags": [
+                    "PGH Supply"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "Update order",
+                "description": "Updates an order record",
+                "parameters": [{
+
                 }],
                 "responses": {
                     "200": {
