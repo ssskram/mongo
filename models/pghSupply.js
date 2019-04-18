@@ -9,6 +9,7 @@ var ProfileSchema = new Schema(
       {
         item: {
           cartegraphID: Number,
+          inventoryID: String,
           itemName: String,
           itemType: String,
           itemUnit: String,
@@ -52,6 +53,7 @@ var OrderSchema = new Schema(
       {
         item: {
           cartegraphID: Number,
+          inventoryID: String,
           itemName: String,
           itemType: String,
           itemUnit: String
