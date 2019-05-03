@@ -42,6 +42,7 @@ var OrderSchema = new Schema(
     comments: String,
     emergencyOrder: Boolean,
     emergencyJustification: String,
+    cartegraphId: String,
     narcanCases: Boolean,
     narcanAdministeredUnknown: String,
     equipmentJustification: String,
