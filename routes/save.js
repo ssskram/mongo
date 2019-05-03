@@ -59,6 +59,7 @@ router.post("/updateOrder", (req, res) => {
       order.status = req.body.status;
       order.supplyComments = req.body.supplyComments;
       order.receivedBy = req.body.receivedBy;
+      order.cartegraphId = req.body.cartegraphId;
       order.supplies = req.body.supplies;
       order.save(err => {
         if (err) res.status(500).send(err);
