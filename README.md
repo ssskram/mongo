@@ -11,7 +11,6 @@ Bearer token.  Just ask for it
     ├── models                  # Data transformations
     ├── routes                  # All endpoints, grouped by application
     ...                   
-    ├── refresh.js              # Generates a new access token per call
     ├── server.js               # Entry point, Express config
     ...
     └── README.md
