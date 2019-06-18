@@ -1,340 +1,332 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "Mongo Proxy",
-        "description": "Handles traffic between MongoDB and client applications",
-        "version": "1.0.0"
-    },
-    "host": "mongo-proxy.azurewebsites.us",
-    "schemes": [
-        "https"
-    ],
-    "securityDefinitions": {
-        "Bearer": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header"
-        }
-    },
-    "paths": {
-        "/get/userProfile": {
-            "get": {
-                "tags": [
-                    "PGH Supply"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "User Profile",
-                "description": "Returns user profile",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "User profile",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "user": {
-                                    "type": "string"
-                                },
-                                "department": {
-                                    "type": "string"
-                                },
-                                "cart": {
-                                    "type": "array",
-                                    "items": {
-                                        "properties": {
-                                            "item": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "cartegraphID": {
-                                                        "type": "number"
-                                                    },
-                                                    "itemName": {
-                                                        "type": "string"
-                                                    },
-                                                    "itemType": {
-                                                        "type": "string"
-                                                    },
-                                                    "itemUnit": {
-                                                        "type": "string"
-                                                    },
-                                                    "department": {
-                                                        "type": "string"
-                                                    }
-                                                }
-                                            },
-                                            "quantity": {
-                                                "type": "number"
-                                            }
-                                        }
-                                    }
-                                },
-                                "createdAt": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "404": {
-                        "description": "User doesn't exist in DB"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/get/allOrders": {
-            "get": {
-                "tags": [
-                    "PGH Supply"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "All orders",
-                "description": "Returns all orders",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "Array of orders",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "SPid": {
-                                        "type": "number"
-                                    },
-                                    "user": {
-                                        "type": "string"
-                                    },
-                                    "userName": {
-                                        "type": "string"
-                                    },
-                                    "department": {
-                                        "type": "string"
-                                    },
-                                    "location": {
-                                        "type": "string"
-                                    },
-                                    "comments": {
-                                        "type": "string"
-                                    },
-                                    "emergencyOrder": {
-                                        "type": "boolean"
-                                    },
-                                    "emergencyJustification": {
-                                        "type": "string"
-                                    },
-                                    "equipmentJustification": {
-                                        "type": "string"
-                                    },
-                                    "narcanCases": {
-                                        "type": "boolean"
-                                    },
-                                    "narcanAdministeredUnknown": {
-                                        "type": "string"
-                                    },
-                                    "miscItems": {
-                                        "type": "string"
-                                    },
-                                    "status": {
-                                        "type": "string"
-                                    },
-                                    "supplyComments": {
-                                        "type": "string"
-                                    },
-                                    "receivedBy": {
-                                        "type": "string"
-                                    },
-                                    "supplies": {
-                                        "type": "array",
-                                        "items": {
-                                            "properties": {
-                                                "item": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "cartegraphID": {
-                                                            "type": "number"
-                                                        },
-                                                        "itemName": {
-                                                            "type": "string"
-                                                        },
-                                                        "itemType": {
-                                                            "type": "string"
-                                                        },
-                                                        "itemUnit": {
-                                                            "type": "string"
-                                                        }
-                                                    }
-                                                },
-                                                "quantityOrdered": {
-                                                    "type": "number"
-                                                },
-                                                "quantityReceived": {
-                                                    "type": "number"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "createdAt": {
-                                        "type": "number"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    }
-                }
-            }
-        },
-        "/save/userProfile": {
-            "post": {
-                "tags": [
-                    "PGH Supply"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "User Profile",
-                "description": "Creates or overwrites user profile",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "Success!"
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/save/cart": {
-            "post": {
-                "tags": [
-                    "PGH Supply"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "Cart",
-                "description": "Saves cart to user profile",
-                "parameters": [{
-
-                }],
-                "responses": {
-                    "200": {
-                        "description": "Success!"
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/save/newOrder": {
-            "post": {
-                "tags": [
-                    "PGH Supply"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "New order",
-                "description": "Creates a new order record",
-                "parameters": [{
-
-                }],
-                "responses": {
-                    "200": {
-                        "description": "Success!"
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/save/updateOrder": {
-            "post": {
-                "tags": [
-                    "PGH Supply"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "Update order",
-                "description": "Updates an order record",
-                "parameters": [{
-
-                }],
-                "responses": {
-                    "200": {
-                        "description": "Success!"
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+  "swagger": "2.0",
+  "info": {
+    "title": "Mongo Proxy",
+    "description": "Handles traffic between MongoDB and client applications",
+    "version": "1.0.0"
+  },
+  "host": "mongo-proxy.azurewebsites.us",
+  "schemes": ["https"],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
+  },
+  "paths": {
+    "/get/userProfile": {
+      "get": {
+        "tags": ["PGH Supply"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "User Profile",
+        "description": "Returns user profile",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "User profile",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "string"
+                },
+                "department": {
+                  "type": "string"
+                },
+                "cart": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "item": {
+                        "type": "object",
+                        "properties": {
+                          "cartegraphID": {
+                            "type": "number"
+                          },
+                          "itemName": {
+                            "type": "string"
+                          },
+                          "itemType": {
+                            "type": "string"
+                          },
+                          "itemUnit": {
+                            "type": "string"
+                          },
+                          "department": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "quantity": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                },
+                "createdAt": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "404": {
+            "description": "User doesn't exist in DB"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get/allOrders": {
+      "get": {
+        "tags": ["PGH Supply"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "All orders",
+        "description": "Returns all orders",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Array of orders",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "SPid": {
+                    "type": "number"
+                  },
+                  "user": {
+                    "type": "string"
+                  },
+                  "userName": {
+                    "type": "string"
+                  },
+                  "department": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "comments": {
+                    "type": "string"
+                  },
+                  "emergencyOrder": {
+                    "type": "boolean"
+                  },
+                  "emergencyJustification": {
+                    "type": "string"
+                  },
+                  "equipmentJustification": {
+                    "type": "string"
+                  },
+                  "narcanCases": {
+                    "type": "boolean"
+                  },
+                  "narcanAdministeredUnknown": {
+                    "type": "string"
+                  },
+                  "miscItems": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "supplyComments": {
+                    "type": "string"
+                  },
+                  "receivedBy": {
+                    "type": "string"
+                  },
+                  "supplies": {
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "item": {
+                          "type": "object",
+                          "properties": {
+                            "cartegraphID": {
+                              "type": "number"
+                            },
+                            "itemName": {
+                              "type": "string"
+                            },
+                            "itemType": {
+                              "type": "string"
+                            },
+                            "itemUnit": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "quantityOrdered": {
+                          "type": "number"
+                        },
+                        "quantityReceived": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  },
+                  "createdAt": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          }
+        }
+      }
+    },
+    "/save/userProfile": {
+      "post": {
+        "tags": ["PGH Supply"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "User Profile",
+        "description": "Creates or overwrites user profile",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success!"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/save/cart": {
+      "post": {
+        "tags": ["PGH Supply"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Cart",
+        "description": "Saves cart to user profile",
+        "parameters": [{}],
+        "responses": {
+          "200": {
+            "description": "Success!"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/save/newOrder": {
+      "post": {
+        "tags": ["PGH Supply"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "New order",
+        "description": "Creates a new order record",
+        "parameters": [{}],
+        "responses": {
+          "200": {
+            "description": "Success!"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/save/updateOrder": {
+      "post": {
+        "tags": ["PGH Supply"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Update order",
+        "description": "Updates an order record",
+        "parameters": [{}],
+        "responses": {
+          "200": {
+            "description": "Success!"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
